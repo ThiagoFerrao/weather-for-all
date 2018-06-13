@@ -9,7 +9,7 @@ import com.google.android.gms.common.api.Status
 import thiagocruz.weatherforall.Constant
 import thiagocruz.weatherforall.interactors.MainInteractor
 import thiagocruz.weatherforall.interactors.MainInteractorImpl
-import thiagocruz.weatherforall.managers.GeolocationManager
+import thiagocruz.weatherforall.managers.GeoLocationManager
 import thiagocruz.weatherforall.managers.GeolocationManagerInterface
 import thiagocruz.weatherforall.views.MainView
 
@@ -31,7 +31,7 @@ class MainPresenterImpl : MainPresenter, GeolocationManagerInterface.Listener, M
     }
 
     override fun getUserLocation() {
-        mActivity?.let { GeolocationManager.getUserLocation(it, this) }
+        mActivity?.let { GeoLocationManager.getUserLocation(it, this) }
     }
 
     override fun locationPermissionRequestOpeningSettingsAccepted() {
@@ -49,7 +49,7 @@ class MainPresenterImpl : MainPresenter, GeolocationManagerInterface.Listener, M
                     return print("[MainPresenterImpl] User Declined The Location Permission Request")
                 }
 
-                mActivity?.let { GeolocationManager.getUserLocation(it, this) }
+                mActivity?.let { GeoLocationManager.getUserLocation(it, this) }
             }
         }
     }
@@ -58,7 +58,7 @@ class MainPresenterImpl : MainPresenter, GeolocationManagerInterface.Listener, M
         when (requestCode) {
             Constant.PermissionRequestCode.GEOLOCATION -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    mActivity?.let { GeolocationManager.getUserLocation(it, this) }
+                    mActivity?.let { GeoLocationManager.getUserLocation(it, this) }
                     return
                 }
 
