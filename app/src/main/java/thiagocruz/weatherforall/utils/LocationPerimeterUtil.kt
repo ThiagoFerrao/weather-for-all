@@ -10,7 +10,7 @@ import kotlin.math.cos
 object LocationPerimeterUtil {
 
     private const val DEFAULT_PERIMETER_RADIUS: Double = 50.0
-    private const val DEFAULT_PERIMETER_ZOOM: Double = 20.0
+    private const val DEFAULT_PERIMETER_ZOOM: Int = 20
     private const val EARTH_RADIUS: Double = 6371.0
     private const val HALF_TURN: Double = 180.0
 
@@ -23,7 +23,7 @@ object LocationPerimeterUtil {
         val leftLong = getNewLongitudeFrom(currentLatitude, currentLongitude, DEFAULT_PERIMETER_RADIUS)
         val rightLong = getNewLongitudeFrom(currentLatitude, currentLongitude, -DEFAULT_PERIMETER_RADIUS)
 
-        return doubleArrayOf(leftLong, bottomLat, rightLong, topLat, DEFAULT_PERIMETER_ZOOM).joinToString(",")
+        return doubleArrayOf(leftLong, bottomLat, rightLong, topLat).joinToString(",") + ",$DEFAULT_PERIMETER_ZOOM"
     }
 
     fun getNewLatitudeFrom(currentLatitude: Double, addKilometers: Double): Double {
