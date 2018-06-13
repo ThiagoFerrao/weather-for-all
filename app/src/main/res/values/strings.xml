@@ -13,4 +13,7 @@
     <string name="dialog_location_denied_request_message">Para acessar a sua localização é necessário que você altere as configurações do app no seu celular. Não se preocupe, encaminharemos você até lá :)</string>
     <string name="dialog_location_request_failed_message">Não foi possível encontrar a sua localização atual, tente novamente mais tarde :(</string>
     <string name="dialog_error_while_fetching_data">Não foi possível realizar a requisição dos dados de previsão de tempo na sua localização :(</string>
+
+    <!--CityForecastAdapter-->
+    <string name="empty_city_forecast_list_message">Nenhum resultado encontrado\nAtualize a sua localização!</string>
 </resources>

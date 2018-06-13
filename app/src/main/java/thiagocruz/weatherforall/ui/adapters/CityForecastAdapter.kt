@@ -40,7 +40,12 @@ class CityForecastAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (getItemViewType(position) == Constant.CityForecastAdapter.EMPTY_ITEM_VIEW_TYPE) {
+            return
+        }
 
+        val cityForecastItemViewHolder = holder as CityForecastItemViewHolder
+        cityForecastItemViewHolder.onBindViewHolder()
     }
 
     class CityForecastItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
