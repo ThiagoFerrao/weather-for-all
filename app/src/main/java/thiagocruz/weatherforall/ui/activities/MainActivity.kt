@@ -7,18 +7,23 @@ import android.os.Bundle
 import android.provider.Settings
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import com.google.android.gms.common.api.Status
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
+import com.google.android.gms.common.api.Status
 import thiagocruz.weatherforall.BuildConfig
 import thiagocruz.weatherforall.Constant
 import thiagocruz.weatherforall.R
+import thiagocruz.weatherforall.entities.CityForecast
 import thiagocruz.weatherforall.presenters.MainPresenter
 import thiagocruz.weatherforall.presenters.MainPresenterImpl
+import thiagocruz.weatherforall.ui.adapters.CityForecastAdapter
 import thiagocruz.weatherforall.views.MainView
 
 class MainActivity : AppCompatActivity(), MainView {
 
     private var mPresenter: MainPresenter? = null
+    private var mAdapter: CityForecastAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +53,9 @@ class MainActivity : AppCompatActivity(), MainView {
         setSupportActionBar(toolbar)
 
         floatingButtonGetLocation.setOnClickListener { _ -> mPresenter?.getUserLocation() }
+
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.itemAnimator = DefaultItemAnimator()
 
         mPresenter?.getUserLocation()
     }
@@ -100,5 +108,17 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun showAppSettingsScreen() {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + BuildConfig.APPLICATION_ID))
         startActivity(intent)
+    }
+
+    override fun loadCityForecastList(result: List<CityForecast>) {
+        if (recyclerView.adapter != null) {
+            mAdapter?.setCityForecastList(result)
+            mAdapter?.notifyDataSetChanged()
+            return
+        }
+
+        mAdapter = CityForecastAdapter()
+        mAdapter?.setCityForecastList(result)
+        recyclerView.adapter = mAdapter
     }
 }

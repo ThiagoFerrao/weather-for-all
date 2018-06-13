@@ -97,11 +97,11 @@ class MainPresenterImpl : MainPresenter, GeolocationManagerInterface.Listener, M
     // MARK: MainInteractor.WeatherForecastListener
 
     override fun foundWeatherForecast(result: List<CityForecast>) {
-
+        mView?.loadCityForecastList(result)
     }
 
     override fun emptyWeatherForecast() {
-
+        mView?.loadCityForecastList(ArrayList())
     }
 
     override fun errorWhileFetchingWeatherForecast() {
