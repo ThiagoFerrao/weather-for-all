@@ -18,13 +18,11 @@ object GeolocationManager {
 
     fun getUserLocation(activity: Activity, listener: GeolocationManagerInterface.Listener) {
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.ACCESS_FINE_LOCATION)) {
-            listener.onPermissionDeniedPermanently()
-            return
+            return listener.onPermissionDeniedPermanently()
         }
 
         if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            listener.onPermissionNeedToBeApproved(Manifest.permission.ACCESS_FINE_LOCATION)
-            return
+            return listener.onPermissionNeedToBeApproved(Manifest.permission.ACCESS_FINE_LOCATION)
         }
 
         val googleApiClient = GoogleApiClient.Builder(activity).addApi(LocationServices.API).build()

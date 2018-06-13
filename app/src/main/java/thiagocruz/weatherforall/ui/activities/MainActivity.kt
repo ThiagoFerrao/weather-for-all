@@ -28,8 +28,20 @@ class MainActivity : AppCompatActivity(), MainView {
         fab.setOnClickListener { _ -> }
 
         mPresenter = MainPresenterImpl()
-        mPresenter?.attachView(this)
-        mPresenter?.getUserLocation(this)
+        mPresenter?.attachView(this, this)
+        mPresenter?.getUserLocation()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        mPresenter?.handleActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        mPresenter?.handleRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
 
@@ -63,7 +75,7 @@ class MainActivity : AppCompatActivity(), MainView {
         try {
             status.startResolutionForResult(this, Constant.ActivityResultRequestCode.GEOLOCATION)
         } catch (e: IntentSender.SendIntentException) {
-            print("[MainActivity] User Declined Turning On The GeoLocation")
+            print("[MainActivity] Error during showLocationToBeTurnedOnRequest - ${e.localizedMessage}")
         }
     }
 
