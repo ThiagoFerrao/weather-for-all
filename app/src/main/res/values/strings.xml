@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Weather For All</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_splash">SplashActivity</string>
 </resources>
