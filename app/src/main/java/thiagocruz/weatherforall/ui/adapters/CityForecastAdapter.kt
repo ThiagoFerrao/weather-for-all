@@ -4,6 +4,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.adapter_city_forecast.view.*
 import thiagocruz.weatherforall.Constant
 import thiagocruz.weatherforall.R
 import thiagocruz.weatherforall.entities.CityForecast
@@ -51,7 +53,21 @@ class CityForecastAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class CityForecastItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun onBindViewHolder(cityForecast: CityForecast) {
-            
+            itemView.textViewCityName.text = cityForecast.name
+
+            Picasso.get()
+                    .load(cityForecast.weather.first().getWheaterImageUrl())
+                    .placeholder(R.mipmap.ic_launcher_foreground)
+                    .error(R.mipmap.ic_launcher_foreground)
+                    .into(itemView.imageViewWeatherIcon)
+
+            itemView.textViewWeatherDescription.text = cityForecast.weather.first().weatherDescription
+
+            itemView.textViewMainTemp.text = cityForecast.temperature.averageTemp.toString()
+
+            itemView.textViewMinTemp.text = cityForecast.temperature.minimumTemp.toString()
+
+            itemView.textViewMaxTemp.text = cityForecast.temperature.maximumTemp.toString()
         }
     }
 
