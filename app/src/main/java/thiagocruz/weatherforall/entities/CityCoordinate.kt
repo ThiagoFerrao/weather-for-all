@@ -3,8 +3,8 @@ package thiagocruz.weatherforall.entities
 import com.google.gson.annotations.SerializedName
 
 data class CityCoordinate (
-        @SerializedName("lon")
+        @SerializedName("Lon")
         val longitude : Double,
-        @SerializedName("lat")
+        @SerializedName("Lat")
         val latitude : Double
 )

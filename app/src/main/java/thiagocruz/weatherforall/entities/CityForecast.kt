@@ -10,5 +10,5 @@ data class CityForecast(
         @SerializedName("main")
         val temperature: ForecastTemperature,
         @SerializedName("weather")
-        val weather: ForecastWeather
+        val weather: List<ForecastWeather>
 )

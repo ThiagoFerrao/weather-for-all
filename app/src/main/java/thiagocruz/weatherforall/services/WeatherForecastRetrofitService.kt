@@ -3,7 +3,7 @@ package thiagocruz.weatherforall.services
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
-import thiagocruz.weatherforall.entities.CityForecast
+import thiagocruz.weatherforall.entities.WeatherApiResponse
 
 interface WeatherForecastRetrofitService {
 
@@ -12,5 +12,5 @@ interface WeatherForecastRetrofitService {
                  @Query("units") temperatureUnit: String,
                  @Query("lang") language: String,
                  @Query("appid") apiKey: String
-    ): Call<List<CityForecast>>
+    ): Call<WeatherApiResponse>
 }
