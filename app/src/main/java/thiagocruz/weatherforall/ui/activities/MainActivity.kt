@@ -54,10 +54,10 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun showLocationPermissionRequestDialog(permission: String) {
         AlertDialog.Builder(this)
-                .setTitle("")
-                .setMessage("")
-                .setNegativeButton("") { _, _ -> print("[MainActivity] User Declined The Location Permission Request") }
-                .setPositiveButton("") { _, _ ->
+                .setTitle(getString(R.string.dialog_location_request_title))
+                .setMessage(getString(R.string.dialog_location_request_message))
+                .setNegativeButton(getString(R.string.dialog_negative_button)) { _, _ -> print("[MainActivity] User Declined The Location Permission Request") }
+                .setPositiveButton(getString(R.string.dialog_positive_button)) { _, _ ->
                     mPresenter?.locationPermissionRequestAccepted(permission)
                 }
                 .setCancelable(false)
@@ -66,10 +66,10 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun showLocationPermissionDeniedPermanentlyDialog() {
         AlertDialog.Builder(this)
-                .setTitle("")
-                .setMessage("")
-                .setNegativeButton("") { _, _ -> print("[MainActivity] User Declined The Location Permission Request") }
-                .setPositiveButton("") { _, _ ->
+                .setTitle(getString(R.string.dialog_location_request_title))
+                .setMessage(getString(R.string.dialog_location_denied_request_message))
+                .setNegativeButton(getString(R.string.dialog_negative_button)) { _, _ -> print("[MainActivity] User Declined The Location Permission Request") }
+                .setPositiveButton(getString(R.string.dialog_positive_button)) { _, _ ->
                     mPresenter?.locationPermissionRequestOpeningSettingsAccepted()
                 }
                 .setCancelable(false)
@@ -86,9 +86,9 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun showLocationRequestFailedDialog() {
         AlertDialog.Builder(this)
-                .setTitle("")
-                .setMessage("")
-                .setPositiveButton("") { _, _ -> }
+                .setTitle(getString(R.string.dialog_error_title))
+                .setMessage(getString(R.string.dialog_location_request_failed_message))
+                .setPositiveButton(getString(R.string.dialog_positive_button)) { _, _ -> }
                 .setCancelable(false)
                 .show()
     }

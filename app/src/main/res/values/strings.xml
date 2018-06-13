@@ -1,5 +1,15 @@
 <resources>
+
+    <!--App-->
     <string name="app_name">Weather For All</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_splash">SplashActivity</string>
+
+    <string name="dialog_error_title">Ops</string>
+    <string name="dialog_positive_button">OK</string>
+    <string name="dialog_negative_button">Cancelar</string>
+
+    <!--Main-->
+    <string name="dialog_location_request_title">Acesso a Localização</string>
+    <string name="dialog_location_request_message">Para encontrarmos as previsões mais relevantes para você é necessário que tenhamos acesso a sua localização :)</string>
+    <string name="dialog_location_denied_request_message">Para acessar a sua localização é necessário que você altere as configurações do app no seu celular. Não se preocupe, encaminharemos você até lá :)</string>
+    <string name="dialog_location_request_failed_message">Não foi possível encontrar a sua localização atual, tente novamente mais tarde :(</string>
 </resources>
