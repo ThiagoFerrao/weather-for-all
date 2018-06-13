@@ -18,14 +18,17 @@ android {
     }
 
     def OPEN_WHEATER_MAP_API_KEY = "OPEN_WHEATER_MAP_API_KEY"
+    def OPEN_WHEATER_MAP_API_URL = "OPEN_WHEATER_MAP_API_URL"
 
     buildTypes {
         debug {
             buildConfigField "String", OPEN_WHEATER_MAP_API_KEY, '"48d675732f843346f60c1c36fdcaba69"'
+            buildConfigField "String", OPEN_WHEATER_MAP_API_URL, '"http://api.openweathermap.org/data/2.5"'
         }
 
         release {
             buildConfigField "String", OPEN_WHEATER_MAP_API_KEY, '"48d675732f843346f60c1c36fdcaba69"'
+            buildConfigField "String", OPEN_WHEATER_MAP_API_URL, '"http://api.openweathermap.org/data/2.5"'
 
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -44,4 +47,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation 'com.google.android.gms:play-services-location:15.0.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
