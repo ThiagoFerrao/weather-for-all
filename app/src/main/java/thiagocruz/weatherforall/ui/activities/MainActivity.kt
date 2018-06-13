@@ -22,14 +22,9 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
-
-        fab.setOnClickListener { _ -> }
 
         mPresenter = MainPresenterImpl()
         mPresenter?.attachView(this, this)
-        mPresenter?.getUserLocation()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -46,6 +41,16 @@ class MainActivity : AppCompatActivity(), MainView {
 
 
     // MARK: MainView
+
+    override fun setupViewContent() {
+        setContentView(R.layout.activity_main)
+
+        setSupportActionBar(toolbar)
+
+        floatingButtonGetLocation.setOnClickListener { _ -> mPresenter?.getUserLocation() }
+
+        mPresenter?.getUserLocation()
+    }
 
     override fun showLocationPermissionRequestDialog(permission: String) {
         AlertDialog.Builder(this)

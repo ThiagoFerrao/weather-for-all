@@ -26,6 +26,8 @@ class MainPresenterImpl : MainPresenter, GeolocationManagerInterface.Listener, M
         mView = mainView
         mActivity = activity
         mInteractor = MainInteractorImpl()
+
+        mView?.setupViewContent()
     }
 
     override fun getUserLocation() {
