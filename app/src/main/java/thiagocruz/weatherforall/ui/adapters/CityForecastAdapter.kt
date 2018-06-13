@@ -45,13 +45,13 @@ class CityForecastAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
 
         val cityForecastItemViewHolder = holder as CityForecastItemViewHolder
-        cityForecastItemViewHolder.onBindViewHolder()
+        mList?.get(position)?.let { cityForecastItemViewHolder.onBindViewHolder(it) }
     }
 
     class CityForecastItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun onBindViewHolder() {
-
+        fun onBindViewHolder(cityForecast: CityForecast) {
+            
         }
     }
 
