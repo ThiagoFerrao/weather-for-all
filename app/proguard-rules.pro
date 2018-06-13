@@ -19,3 +19,48 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+
+#=================================================================================================
+## Retrofit
+#=================================================================================================
+# Retrofit 2.X
+## https://square.github.io/retrofit/ ##
+
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+-keepattributes Signature
+-keepattributes Exceptions
+
+#-keepclasseswithmembers class * {
+#    @retrofit2.http.* <methods>;
+#}
+
+# Retain service method parameters.
+-keepclassmembernames,allowobfuscation interface * {
+    @retrofit2.http.* <methods>;
+}
+
+# Retain generic type information for use by reflection by converters and adapters.
+-keepattributes Signature
+# Retain service method parameters.
+-keepclassmembers,allowshrinking,allowobfuscation interface * {
+    @retrofit2.http.* <methods>;
+}
+# Ignore annotation used for build tooling.
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+#=================================================================================================
+
+
+#=================================================================================================
+## Okio
+#=================================================================================================
+-dontwarn okio.**
+#=================================================================================================
+
+
+#=================================================================================================
+## Picasso
+#=================================================================================================
+-dontwarn com.squareup.okhttp.**
+#=================================================================================================
