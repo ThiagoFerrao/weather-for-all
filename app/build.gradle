@@ -23,12 +23,12 @@ android {
     buildTypes {
         debug {
             buildConfigField "String", OPEN_WHEATER_MAP_API_KEY, '"48d675732f843346f60c1c36fdcaba69"'
-            buildConfigField "String", OPEN_WHEATER_MAP_API_URL, '"http://api.openweathermap.org/data/2.5"'
+            buildConfigField "String", OPEN_WHEATER_MAP_API_URL, '"http://api.openweathermap.org/data/2.5/"'
         }
 
         release {
             buildConfigField "String", OPEN_WHEATER_MAP_API_KEY, '"48d675732f843346f60c1c36fdcaba69"'
-            buildConfigField "String", OPEN_WHEATER_MAP_API_URL, '"http://api.openweathermap.org/data/2.5"'
+            buildConfigField "String", OPEN_WHEATER_MAP_API_URL, '"http://api.openweathermap.org/data/2.5/"'
 
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

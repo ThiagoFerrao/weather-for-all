@@ -7,7 +7,7 @@ import kotlin.math.cos
 // Logic Found On The Link Below
 // https://stackoverflow.com/questions/7477003/calculating-new-longitude-latitude-from-old-n-meters?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 
-object LocationUtil {
+object LocationConverterUtil {
 
     private const val DEFAULT_PERIMETER_RADIUS: Double = 50.0
     private const val EARTH_RADIUS: Double = 6371.0
