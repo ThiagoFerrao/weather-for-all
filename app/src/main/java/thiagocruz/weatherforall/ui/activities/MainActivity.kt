@@ -84,10 +84,10 @@ class MainActivity : AppCompatActivity(), MainView {
         }
     }
 
-    override fun showLocationRequestFailedDialog() {
+    override fun showErrorDialog(message: String) {
         AlertDialog.Builder(this)
                 .setTitle(getString(R.string.dialog_error_title))
-                .setMessage(getString(R.string.dialog_location_request_failed_message))
+                .setMessage(message)
                 .setPositiveButton(getString(R.string.dialog_positive_button)) { _, _ -> }
                 .setCancelable(false)
                 .show()

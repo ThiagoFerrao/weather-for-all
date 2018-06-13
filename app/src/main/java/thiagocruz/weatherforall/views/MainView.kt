@@ -7,7 +7,7 @@ interface MainView {
     fun showLocationPermissionRequestDialog(permission: String)
     fun showLocationPermissionDeniedPermanentlyDialog()
     fun showLocationToBeTurnedOnRequest(status: Status)
-    fun showLocationRequestFailedDialog()
+    fun showErrorDialog(message: String)
     fun requestPermission(permission: String)
     fun showAppSettingsScreen()
 }

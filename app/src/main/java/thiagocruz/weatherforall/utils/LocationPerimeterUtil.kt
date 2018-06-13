@@ -7,9 +7,10 @@ import kotlin.math.cos
 // Logic Found On The Link Below
 // https://stackoverflow.com/questions/7477003/calculating-new-longitude-latitude-from-old-n-meters?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 
-object LocationConverterUtil {
+object LocationPerimeterUtil {
 
     private const val DEFAULT_PERIMETER_RADIUS: Double = 50.0
+    private const val DEFAULT_PERIMETER_ZOOM: Double = 20.0
     private const val EARTH_RADIUS: Double = 6371.0
     private const val HALF_TURN: Double = 180.0
 
@@ -22,7 +23,7 @@ object LocationConverterUtil {
         val leftLong = getNewLongitudeFrom(currentLatitude, currentLongitude, DEFAULT_PERIMETER_RADIUS)
         val rightLong = getNewLongitudeFrom(currentLatitude, currentLongitude, -DEFAULT_PERIMETER_RADIUS)
 
-        return doubleArrayOf(leftLong, bottomLat, rightLong, topLat).joinToString(",")
+        return doubleArrayOf(leftLong, bottomLat, rightLong, topLat, DEFAULT_PERIMETER_ZOOM).joinToString(",")
     }
 
     fun getNewLatitudeFrom(currentLatitude: Double, addKilometers: Double): Double {

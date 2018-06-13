@@ -7,6 +7,8 @@ import android.content.pm.PackageManager
 import android.location.Location
 import com.google.android.gms.common.api.Status
 import thiagocruz.weatherforall.Constant
+import thiagocruz.weatherforall.R
+import thiagocruz.weatherforall.entities.CityForecast
 import thiagocruz.weatherforall.interactors.MainInteractor
 import thiagocruz.weatherforall.interactors.MainInteractorImpl
 import thiagocruz.weatherforall.managers.GeoLocationManager
@@ -87,11 +89,23 @@ class MainPresenterImpl : MainPresenter, GeolocationManagerInterface.Listener, M
     }
 
     override fun onUserLocationFailedToBeRetrieved() {
-        mView?.showLocationRequestFailedDialog()
+        val errorMessage = mActivity?.let { it.getString(R.string.dialog_location_request_failed_message) } ?: return
+        mView?.showErrorDialog(errorMessage)
     }
 
 
     // MARK: MainInteractor.WeatherForecastListener
 
+    override fun foundWeatherForecast(result: List<CityForecast>) {
 
+    }
+
+    override fun emptyWeatherForecast() {
+
+    }
+
+    override fun errorWhileFetchingWeatherForecast() {
+        val errorMessage = mActivity?.let { it.getString(R.string.dialog_location_request_failed_message) } ?: return
+        mView?.showErrorDialog(errorMessage)
+    }
 }
