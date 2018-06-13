@@ -9,6 +9,6 @@ class MainInteractorImpl : MainInteractor {
     override fun findWeatherForecast(location: Location, listener: MainInteractor.WeatherForecastListener) {
         val forecastPerimeter = LocationConverterUtil.getDefaultPerimeter(location)
 
-        WeatherForecastService.getWeatherForecast(forecastPerimeter, "metric")
+        WeatherForecastService.getWeatherForecast(forecastPerimeter + ",10", "metric")
     }
 }
