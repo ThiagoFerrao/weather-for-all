@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Menu
 import kotlinx.android.synthetic.main.activity_main.*
 import com.google.android.gms.common.api.Status
 import thiagocruz.weatherforall.BuildConfig
@@ -30,6 +31,12 @@ class MainActivity : AppCompatActivity(), MainView {
 
         mPresenter = MainPresenterImpl()
         mPresenter?.attachView(this, this)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+
+        return true
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
