@@ -67,13 +67,20 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
     }
 
     override fun cityForecastListWasUpdated() {
+        moveMapCameraToUserLocation()
+        addMarksToMap()
+    }
+
+    private fun moveMapCameraToUserLocation() {
         val preferences = this.getSharedPreferences(Constant.SharedPreferences.DEFAULT, Context.MODE_PRIVATE)
         val userLatitude = preferences.getString(Constant.SharedPreferences.KEY_USER_LOCATION_LATITUDE, null)?.toDouble()
         val userLongitude = preferences.getString(Constant.SharedPreferences.KEY_USER_LOCATION_LONGITUDE, null)?.toDouble()
 
         if (userLatitude != null && userLongitude != null)
             mMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(userLatitude, userLongitude), Constant.Map.DEFAULT_ZOOM))
+    }
 
+    private fun addMarksToMap() {
         mList?.let {
             mMap?.clear()
 
