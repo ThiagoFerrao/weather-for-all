@@ -1,7 +1,7 @@
 <resources>
 
     <!--App-->
-    <string name="app_name">Weather For All</string>
+    <string name="app_name">Previsão de Bolso</string>
 
     <string name="dialog_error_title">Ops</string>
     <string name="dialog_positive_button">OK</string>
