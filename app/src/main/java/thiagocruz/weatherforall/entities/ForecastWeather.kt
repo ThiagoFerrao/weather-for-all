@@ -13,7 +13,7 @@ data class ForecastWeather(
         val weatherIconID: String
 ) : Parcelable {
     fun getWeatherImageUrl(): String {
-        return "http://openweathermap.org/img/w/${this.weatherIconID}.png"
+        return "http://openweathermap.org/img/w/$weatherIconID.png"
     }
 
     constructor(source: Parcel) : this(

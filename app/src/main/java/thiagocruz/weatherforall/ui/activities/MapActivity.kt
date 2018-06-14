@@ -1,5 +1,6 @@
 package thiagocruz.weatherforall.ui.activities
 
+import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.Toolbar
 import android.view.Menu
@@ -17,6 +18,8 @@ import thiagocruz.weatherforall.managers.TemperatureUnitManager
 class MapActivity : BaseActivity(), OnMapReadyCallback {
 
     private var mMap: GoogleMap? = null
+
+//  mPresenter?.initializeWithIntent(intent)
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_map, menu)
@@ -53,12 +56,24 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-
-        mPresenter?.initializeWithIntent(intent)
     }
 
     override fun cityForecastListWasUpdated() {
+        val preferences = this.getSharedPreferences(Constant.SharedPreferences.DEFAULT, Context.MODE_PRIVATE)
+        val userLatitude = preferences.getString(Constant.SharedPreferences.KEY_USER_LOCATION_LATITUDE, null)?.toDouble()
+        val userLongitude = preferences.getString(Constant.SharedPreferences.KEY_USER_LOCATION_LONGITUDE, null)?.toDouble()
 
+        if (userLatitude != null && userLongitude != null)
+            mMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(userLatitude, userLongitude), Constant.Map.DEFAULT_ZOOM))
+
+        mList?.let {
+            for (cityForecast in it) {
+                val cityName = cityForecast.name
+                val cityLatLng = cityForecast.coordinate.getCityLatLng()
+
+                mMap?.addMarker(MarkerOptions().position(cityLatLng).title(cityName))
+            }
+        }
     }
 
     override fun presentNextScreen() {
@@ -73,11 +88,6 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
         mMap?.uiSettings?.isMapToolbarEnabled = false
-
-        val sydney = LatLng(-34.0, 151.0)
-        mMap?.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap?.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
 }

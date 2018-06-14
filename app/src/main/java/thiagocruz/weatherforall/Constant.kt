@@ -34,4 +34,8 @@ object Constant {
     object IntentExtra {
         const val CITY_FORECAST_LIST = "ExtraCityForecastList"
     }
+
+    object Map {
+        const val DEFAULT_ZOOM = 9f
+    }
 }

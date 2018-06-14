@@ -2,6 +2,7 @@ package thiagocruz.weatherforall.entities
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.android.gms.maps.model.LatLng
 import com.google.gson.annotations.SerializedName
 import thiagocruz.weatherforall.utils.DistanceBetweenUtil
 
@@ -11,6 +12,10 @@ data class CityCoordinate(
         @SerializedName("Lat")
         val latitude: Double
 ) : Parcelable {
+    fun getCityLatLng(): LatLng {
+        return LatLng(latitude, longitude)
+    }
+
     fun distanceToLatLngInKm(latitude: Double, longitude: Double): Double {
         return DistanceBetweenUtil.getTheDistanceBetweenLatLngsInKm(latitude, longitude, this.latitude, this.longitude)
     }
