@@ -140,6 +140,8 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         mMap?.uiSettings?.isMapToolbarEnabled = false
+        mMap?.uiSettings?.isZoomGesturesEnabled = false
+        mMap?.uiSettings?.isRotateGesturesEnabled = false
         mMap?.setOnMarkerClickListener { marker: Marker? ->
             marker?.showInfoWindow()
             true
