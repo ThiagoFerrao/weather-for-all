@@ -146,7 +146,7 @@ class MainActivity : AppCompatActivity(), MainView {
             return
         }
 
-        mAdapter = CityForecastAdapter()
+        mAdapter = CityForecastAdapter(this)
         mAdapter?.setCityForecastList(result)
         recyclerView.adapter = mAdapter
     }

@@ -12,21 +12,42 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textViewCityName"
+        <LinearLayout
+            android:id="@+id/layoutTopWeather"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="28sp"
-            android:textStyle="bold" />
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewCityName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewDistanceToUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layoutCenterWeather"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textViewCityName"
+            android:layout_below="@+id/layoutTopWeather"
             android:layout_marginTop="4dp"
             android:gravity="center"
             android:orientation="horizontal">
@@ -45,13 +66,14 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_weight="2"
+                android:ellipsize="end"
                 android:maxLines="2"
                 android:textColor="@color/white"
                 android:textSize="26sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/layoutTemp"
+            android:id="@+id/layoutBottomWeather"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layoutCenterWeather"
@@ -66,6 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="1"
                 android:textColor="@color/white"
@@ -76,6 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="1"
                 android:textColor="@color/white"
@@ -86,9 +110,10 @@
             android:id="@+id/textViewMainTemp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/layoutTemp"
+            android:layout_alignBottom="@+id/layoutBottomWeather"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="40dp"
+            android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
             android:textColor="@color/white"

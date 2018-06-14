@@ -39,7 +39,7 @@ object TemperatureUnitManager {
         menuItem?.icon = context.getDrawable(R.drawable.ic_temp_fahrenheit)
     }
 
-    private fun isTemperatureUnitCelsius(tempUnit: String?): Boolean {
+    fun isTemperatureUnitCelsius(tempUnit: String?): Boolean {
         if (tempUnit == null) return true
 
         return tempUnit == Constant.TemperatureUnit.CELSIUS
