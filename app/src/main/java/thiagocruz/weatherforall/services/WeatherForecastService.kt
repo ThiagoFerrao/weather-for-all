@@ -4,16 +4,15 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import thiagocruz.weatherforall.BuildConfig
-import thiagocruz.weatherforall.Constant
 import thiagocruz.weatherforall.entities.WeatherApiResponse
 import thiagocruz.weatherforall.utils.RetrofitUtil
 import thiagocruz.weatherforall.utils.ServiceErrorUtil
 
 object WeatherForecastService {
 
-    fun getWeatherForecast(perimeter: String, temperatureUnit: String, callback: BaseCallback<WeatherApiResponse>) {
+    fun getWeatherForecast(perimeter: String, temperatureUnit: String, forecastLanguage: String, callback: BaseCallback<WeatherApiResponse>) {
         val weatherForecastService = RetrofitUtil.buildRequest().create(WeatherForecastRetrofitService::class.java)
-        val call = weatherForecastService.forecast(perimeter, temperatureUnit, Constant.AppLanguage.PORTUGUESE, BuildConfig.OPEN_WEATHER_MAP_API_KEY)
+        val call = weatherForecastService.forecast(perimeter, temperatureUnit, forecastLanguage, BuildConfig.OPEN_WEATHER_MAP_API_KEY)
 
         call.enqueue(object : Callback<WeatherApiResponse> {
             override fun onResponse(call: Call<WeatherApiResponse>?, response: Response<WeatherApiResponse>?) {

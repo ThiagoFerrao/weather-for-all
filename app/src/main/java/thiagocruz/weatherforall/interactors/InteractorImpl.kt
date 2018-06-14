@@ -17,8 +17,9 @@ class InteractorImpl : InteractorInterface {
     override fun findWeatherForecast(context: Context, location: Location, listener: InteractorInterface.WeatherForecastListener) {
         val forecastPerimeter = LocationPerimeterUtil.getDefaultPerimeter(location)
         val temperatureUnit = TemperatureUnitManager.getCurrentTemperatureUnit(context)
+        val forecastLanguage = Constant.AppLanguage.PORTUGUESE
 
-        WeatherForecastService.getWeatherForecast(forecastPerimeter, temperatureUnit,
+        WeatherForecastService.getWeatherForecast(forecastPerimeter, temperatureUnit, forecastLanguage,
                 object : BaseCallback<WeatherApiResponse> {
                     override fun onResponse(call: Call<WeatherApiResponse>?, response: Response<WeatherApiResponse>?) {
                         val result = response?.body()?.cityForecastList
