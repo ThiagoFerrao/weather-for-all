@@ -50,6 +50,8 @@ class MainActivity : BaseActivity() {
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.itemAnimator = DefaultItemAnimator()
+
+        mPresenter?.initializeWithIntent(intent)
     }
 
     override fun cityForecastListWasUpdated() {

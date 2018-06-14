@@ -53,6 +53,8 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        mPresenter?.initializeWithIntent(intent)
     }
 
     override fun cityForecastListWasUpdated() {

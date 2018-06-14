@@ -7,6 +7,7 @@ import thiagocruz.weatherforall.views.ViewInterface
 
 interface PresenterInterface {
     fun attachView(view: ViewInterface, activity: Activity)
+    fun initializeWithIntent(intent: Intent?)
     fun getUserLocation()
     fun locationPermissionRequestOpeningSettingsAccepted()
     fun locationPermissionRequestAccepted(permission: String)

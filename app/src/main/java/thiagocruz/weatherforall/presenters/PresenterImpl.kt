@@ -35,6 +35,10 @@ class PresenterImpl : PresenterInterface, GeolocationManagerInterface.Listener, 
         mView?.setupViewContent()
     }
 
+    override fun initializeWithIntent(intent: Intent?) {
+
+    }
+
     override fun getUserLocation() {
         mActivity?.let { GeoLocationManager.getUserLocation(it, this) }
     }
