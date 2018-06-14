@@ -86,6 +86,10 @@ class MainPresenterImpl : MainPresenter, GeolocationManagerInterface.Listener, M
         mActivity?.let { mInteractor?.findWeatherForecast(it, userLocation, this) }
     }
 
+    override fun handleChangeToMap() {
+        mView?.presentMap()
+    }
+
 
     // MARK: GeolocationManagerInterface.Listener
 

@@ -54,8 +54,7 @@ class MainActivity : AppCompatActivity(), MainView {
 
         val itemChangeToMap = menu?.findItem(R.id.action_change_to_map)
         itemChangeToMap?.setOnMenuItemClickListener { _ ->
-            val intent = Intent(this, MapActivity::class.java)
-            startActivity(intent)
+            mPresenter?.handleChangeToMap()
             true
         }
 
@@ -150,5 +149,11 @@ class MainActivity : AppCompatActivity(), MainView {
         mAdapter = CityForecastAdapter(this)
         mAdapter?.setCityForecastList(result)
         recyclerView.adapter = mAdapter
+    }
+
+    override fun presentMap() {
+        val intent = Intent(this, MapActivity::class.java)
+        mAdapter?.mList?.let { intent.putParcelableArrayListExtra(Constant.IntentExtra.CITY_FORECAST_LIST, ArrayList(it)) }
+        startActivity(intent)
     }
 }

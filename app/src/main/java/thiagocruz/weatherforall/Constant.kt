@@ -30,4 +30,8 @@ object Constant {
         const val KEY_USER_LOCATION_LATITUDE = "keyUserLocationLatitude"
         const val KEY_USER_LOCATION_LONGITUDE = "keyUserLocationLongitude"
     }
+
+    object IntentExtra {
+        const val CITY_FORECAST_LIST = "ExtraCityForecastList"
+    }
 }

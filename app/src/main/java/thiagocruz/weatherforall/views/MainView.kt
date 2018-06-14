@@ -12,4 +12,5 @@ interface MainView {
     fun requestPermission(permission: String)
     fun showAppSettingsScreen()
     fun loadCityForecastList(result: List<CityForecast>)
+    fun presentMap()
 }
