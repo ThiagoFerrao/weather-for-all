@@ -5,6 +5,7 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
+import android.view.MenuItem
 import com.google.android.gms.common.api.Status
 import thiagocruz.weatherforall.Constant
 import thiagocruz.weatherforall.R
@@ -13,6 +14,7 @@ import thiagocruz.weatherforall.interactors.MainInteractor
 import thiagocruz.weatherforall.interactors.MainInteractorImpl
 import thiagocruz.weatherforall.managers.GeoLocationManager
 import thiagocruz.weatherforall.managers.GeolocationManagerInterface
+import thiagocruz.weatherforall.managers.TemperatureUnitManager
 import thiagocruz.weatherforall.views.MainView
 
 class MainPresenterImpl : MainPresenter, GeolocationManagerInterface.Listener, MainInteractor.WeatherForecastListener {
@@ -69,6 +71,10 @@ class MainPresenterImpl : MainPresenter, GeolocationManagerInterface.Listener, M
         }
     }
 
+    override fun handleChangeMetrics(item: MenuItem?) {
+        TemperatureUnitManager.updateTemperatureUnit(mActivity, item)
+    }
+
 
     // MARK: GeolocationManagerInterface.Listener
 
@@ -85,7 +91,7 @@ class MainPresenterImpl : MainPresenter, GeolocationManagerInterface.Listener, M
     }
 
     override fun onUserLocationSuccessfullyRetrieved(location: Location) {
-        mInteractor?.findWeatherForecast(location, this)
+        mActivity?.let { mInteractor?.findWeatherForecast(it, location, this) }
     }
 
     override fun onUserLocationFailedToBeRetrieved() {

@@ -18,4 +18,14 @@ object Constant {
         const val EMPTY_ITEM_VIEW_TYPE = 0
         const val CONTENT_ITEM_VIEW_TYPE = 1
     }
+
+    object TemperatureUnit {
+        const val CELSIUS = "metric"
+        const val FAHRENHEIT = "imperial"
+    }
+
+    object SharedPreferences {
+        const val DEFAULT = "AppSharedPreferences"
+        const val KEY_TEMPERATURE_UNIT = "keyTemperatureUnit"
+    }
 }

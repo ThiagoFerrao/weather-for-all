@@ -12,7 +12,7 @@ import thiagocruz.weatherforall.entities.CityForecast
 
 class CityForecastAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var mList: List<CityForecast>? = null
+    var mList: List<CityForecast>? = null
     private var isListEmpty = { (mList?.size == null || mList?.size == 0) }
 
     fun setCityForecastList(cityForecastList: List<CityForecast>) {

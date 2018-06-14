@@ -10,12 +10,14 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import com.google.android.gms.common.api.Status
 import thiagocruz.weatherforall.BuildConfig
 import thiagocruz.weatherforall.Constant
 import thiagocruz.weatherforall.R
 import thiagocruz.weatherforall.entities.CityForecast
+import thiagocruz.weatherforall.managers.TemperatureUnitManager
 import thiagocruz.weatherforall.presenters.MainPresenter
 import thiagocruz.weatherforall.presenters.MainPresenterImpl
 import thiagocruz.weatherforall.ui.adapters.CityForecastAdapter
@@ -25,6 +27,7 @@ class MainActivity : AppCompatActivity(), MainView {
 
     private var mPresenter: MainPresenter? = null
     private var mAdapter: CityForecastAdapter? = null
+    private var mItemChangeMetrics: MenuItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +36,27 @@ class MainActivity : AppCompatActivity(), MainView {
         mPresenter?.attachView(this, this)
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        TemperatureUnitManager.setCurrentMenuItemIcon(this, mItemChangeMetrics)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+
+        mItemChangeMetrics = menu?.findItem(R.id.action_change_metrics)
+        mItemChangeMetrics?.setOnMenuItemClickListener { item ->
+            mPresenter?.handleChangeMetrics(item)
+            true
+        }
+
+        val itemChangeToMap = menu?.findItem(R.id.action_change_to_map)
+        itemChangeToMap?.setOnMenuItemClickListener { _ ->
+            val intent = Intent(this, MapActivity::class.java)
+            startActivity(intent)
+            true
+        }
 
         return true
     }
