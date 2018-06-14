@@ -2,6 +2,7 @@ package thiagocruz.weatherforall.presenters
 
 import android.app.Activity
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
@@ -73,6 +74,16 @@ class MainPresenterImpl : MainPresenter, GeolocationManagerInterface.Listener, M
 
     override fun handleChangeMetrics(item: MenuItem?) {
         TemperatureUnitManager.updateTemperatureUnit(mActivity, item)
+
+        val preferences = mActivity?.getSharedPreferences(Constant.SharedPreferences.DEFAULT, Context.MODE_PRIVATE) ?: return
+        val userLatitude = preferences.getString(Constant.SharedPreferences.KEY_USER_LOCATION_LATITUDE, null)?.toDouble() ?: return
+        val userLongitude = preferences.getString(Constant.SharedPreferences.KEY_USER_LOCATION_LONGITUDE, null)?.toDouble() ?: return
+
+        val userLocation = Location("")
+        userLocation.latitude = userLatitude
+        userLocation.longitude = userLongitude
+
+        mActivity?.let { mInteractor?.findWeatherForecast(it, userLocation, this) }
     }
 
 
@@ -91,11 +102,17 @@ class MainPresenterImpl : MainPresenter, GeolocationManagerInterface.Listener, M
     }
 
     override fun onUserLocationSuccessfullyRetrieved(location: Location) {
+        val editor = mActivity?.getSharedPreferences(Constant.SharedPreferences.DEFAULT, Context.MODE_PRIVATE)?.edit()
+        editor?.putString(Constant.SharedPreferences.KEY_USER_LOCATION_LATITUDE, location.latitude.toString())
+        editor?.putString(Constant.SharedPreferences.KEY_USER_LOCATION_LONGITUDE, location.longitude.toString())
+        editor?.apply()
+
         mActivity?.let { mInteractor?.findWeatherForecast(it, location, this) }
     }
 
     override fun onUserLocationFailedToBeRetrieved() {
-        val errorMessage = mActivity?.let { it.getString(R.string.dialog_location_request_failed_message) } ?: return
+        val errorMessage = mActivity?.let { it.getString(R.string.dialog_location_request_failed_message) }
+                ?: return
         mView?.showErrorDialog(errorMessage)
     }
 
@@ -111,7 +128,8 @@ class MainPresenterImpl : MainPresenter, GeolocationManagerInterface.Listener, M
     }
 
     override fun errorWhileFetchingWeatherForecast() {
-        val errorMessage = mActivity?.let { it.getString(R.string.dialog_location_request_failed_message) } ?: return
+        val errorMessage = mActivity?.let { it.getString(R.string.dialog_location_request_failed_message) }
+                ?: return
         mView?.showErrorDialog(errorMessage)
     }
 }
