@@ -27,6 +27,7 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
             field = value
             mPresenter?.initializeWithIntent(intent)
         }
+    private var mCurrentCameraPostition: LatLng? = null
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_map, menu)
@@ -77,6 +78,8 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
 
         if (userLatitude != null && userLongitude != null)
             mMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(userLatitude, userLongitude), Constant.Map.DEFAULT_ZOOM))
+
+        mCurrentCameraPostition = mMap?.cameraPosition?.target
     }
 
     private fun addMarksToMap() {
@@ -140,6 +143,12 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
         mMap?.setOnMarkerClickListener { marker: Marker? ->
             marker?.showInfoWindow()
             true
+        }
+        mMap?.setOnCameraIdleListener {
+            val hasCameraPositionChanged = !(mCurrentCameraPostition?.equals(mMap?.cameraPosition?.target)
+                    ?: false)
+            if (hasCameraPositionChanged)
+                mPresenter?.mapCameraPositionUpdated(mMap?.cameraPosition?.target)
         }
     }
 }

@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.view.MenuItem
 import com.google.android.gms.common.api.Status
+import com.google.android.gms.maps.model.LatLng
 import thiagocruz.weatherforall.Constant
 import thiagocruz.weatherforall.R
 import thiagocruz.weatherforall.entities.CityForecast
@@ -44,6 +45,18 @@ class PresenterImpl : PresenterInterface, GeolocationManagerInterface.Listener, 
         }
 
         getUserLocation()
+    }
+
+    override fun mapCameraPositionUpdated(newCameraLatLng: LatLng?) {
+        if (newCameraLatLng == null) {
+            return
+        }
+
+        val newLocation = Location("")
+        newLocation.latitude = newCameraLatLng.latitude
+        newLocation.longitude = newCameraLatLng.longitude
+
+        mActivity?.let { mInteractor?.findWeatherForecast(it, newLocation, this) }
     }
 
     override fun getUserLocation() {
