@@ -40,12 +40,6 @@ class MapActivity : AppCompatActivity(), ViewInterface, OnMapReadyCallback {
         mPresenter?.attachView(this, this)
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        TemperatureUnitManager.setCurrentMenuItemIcon(this, mItemChangeMetrics)
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_map, menu)
 
@@ -149,6 +143,7 @@ class MapActivity : AppCompatActivity(), ViewInterface, OnMapReadyCallback {
         val intent = Intent(this, MainActivity::class.java)
         mList?.let { intent.putParcelableArrayListExtra(Constant.IntentExtra.CITY_FORECAST_LIST, ArrayList(it)) }
         startActivity(intent)
+        finish()
     }
 
 
