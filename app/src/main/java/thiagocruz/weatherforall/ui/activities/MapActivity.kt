@@ -20,7 +20,6 @@ import thiagocruz.weatherforall.managers.TemperatureUnitManager
 import java.lang.Exception
 import android.graphics.drawable.BitmapDrawable
 
-
 class MapActivity : BaseActivity(), OnMapReadyCallback {
 
     private var mMap: GoogleMap? = null
