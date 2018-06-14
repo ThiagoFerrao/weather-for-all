@@ -9,8 +9,8 @@
         android:layout_centerInParent="true"
         android:gravity="center"
         android:text="@string/empty_city_forecast_list_message"
+        android:textColor="@color/dark_text"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"/>
+        android:textStyle="bold" />
 
 </RelativeLayout>

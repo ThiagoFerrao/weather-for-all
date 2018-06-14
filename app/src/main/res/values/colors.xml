@@ -2,10 +2,14 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#dab600</color>
+    <color name="colorAccent">#DAB600</color>
 
-    <color name="activities_background">#373737</color>
     <color name="ic_launcher_background">@color/white</color>
+    <color name="activities_background">#E5E5E5</color>
+    <color name="card_background">@color/white</color>
+    <color name="dark_text">#707070</color>
+    <color name="default_text">#797979</color>
+    <color name="light_text">#BBBBBB</color>
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
