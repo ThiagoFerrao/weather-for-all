@@ -10,6 +10,7 @@
         android:gravity="center"
         android:text="@string/empty_city_forecast_list_message"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/white"/>
 
 </RelativeLayout>
