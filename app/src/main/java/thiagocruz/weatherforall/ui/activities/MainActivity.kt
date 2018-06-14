@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity(), MainView {
         menuInflater.inflate(R.menu.menu_main, menu)
 
         mItemChangeMetrics = menu?.findItem(R.id.action_change_metrics)
+        TemperatureUnitManager.setCurrentMenuItemIcon(this, mItemChangeMetrics)
         mItemChangeMetrics?.setOnMenuItemClickListener { item ->
             mPresenter?.handleChangeMetrics(item)
             true
