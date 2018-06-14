@@ -10,7 +10,7 @@ data class ForecastWeather(
         @SerializedName("icon")
         val weatherIconID: String
 ) {
-    fun getWheaterImageUrl(): String {
-        return "http://openweathermap.org/img/w/${this.weatherIconID}"
+    fun getWeatherImageUrl(): String {
+        return "http://openweathermap.org/img/w/${this.weatherIconID}.png"
     }
 }

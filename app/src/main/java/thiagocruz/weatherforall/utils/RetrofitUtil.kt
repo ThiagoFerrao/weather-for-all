@@ -16,7 +16,7 @@ object RetrofitUtil {
         val client = client()
 
         return Retrofit.Builder()
-                .baseUrl(BuildConfig.OPEN_WHEATER_MAP_API_URL)
+                .baseUrl(BuildConfig.OPEN_WEATHER_MAP_API_URL)
                 .addConverterFactory(GsonConverterFactory.create(gsonBuilder()))
                 .client(client)
                 .build()

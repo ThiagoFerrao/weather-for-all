@@ -56,9 +56,9 @@ class CityForecastAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             itemView.textViewCityName.text = cityForecast.name
 
             Picasso.get()
-                    .load(cityForecast.weather.first().getWheaterImageUrl())
-                    .placeholder(R.mipmap.ic_launcher_foreground)
-                    .error(R.mipmap.ic_launcher_foreground)
+                    .load(cityForecast.weather.first().getWeatherImageUrl())
+                    .placeholder(R.drawable.logo_splash)
+                    .error(R.drawable.logo_splash)
                     .into(itemView.imageViewWeatherIcon)
 
             itemView.textViewWeatherDescription.text = cityForecast.weather.first().weatherDescription

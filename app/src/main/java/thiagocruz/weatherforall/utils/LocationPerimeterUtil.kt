@@ -10,7 +10,7 @@ import kotlin.math.cos
 object LocationPerimeterUtil {
 
     private const val DEFAULT_PERIMETER_RADIUS: Double = 50.0
-    private const val DEFAULT_PERIMETER_ZOOM: Int = 20
+    private const val DEFAULT_PERIMETER_ZOOM: Int = 50
     private const val EARTH_RADIUS: Double = 6371.0
     private const val HALF_TURN: Double = 180.0
 

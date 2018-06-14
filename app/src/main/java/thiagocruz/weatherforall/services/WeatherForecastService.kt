@@ -13,7 +13,7 @@ object WeatherForecastService {
 
     fun getWeatherForecast(perimeter: String, temperatureUnit: String, callback: BaseCallback<WeatherApiResponse>) {
         val weatherForecastService = RetrofitUtil.buildRequest().create(WeatherForecastRetrofitService::class.java)
-        val call = weatherForecastService.forecast(perimeter, temperatureUnit, Constant.AppLanguage.PORTUGUESE, BuildConfig.OPEN_WHEATER_MAP_API_KEY)
+        val call = weatherForecastService.forecast(perimeter, temperatureUnit, Constant.AppLanguage.PORTUGUESE, BuildConfig.OPEN_WEATHER_MAP_API_KEY)
 
         call.enqueue(object : Callback<WeatherApiResponse> {
             override fun onResponse(call: Call<WeatherApiResponse>?, response: Response<WeatherApiResponse>?) {
