@@ -56,6 +56,11 @@ class PresenterImpl : PresenterInterface, GeolocationManagerInterface.Listener, 
         newLocation.latitude = newCameraLatLng.latitude
         newLocation.longitude = newCameraLatLng.longitude
 
+        val editor = mActivity?.getSharedPreferences(Constant.SharedPreferences.DEFAULT, Context.MODE_PRIVATE)?.edit()
+        editor?.putString(Constant.SharedPreferences.KEY_USER_LOCATION_LATITUDE, newCameraLatLng.latitude.toString())
+        editor?.putString(Constant.SharedPreferences.KEY_USER_LOCATION_LONGITUDE, newCameraLatLng.longitude.toString())
+        editor?.apply()
+
         mActivity?.let { mInteractor?.findWeatherForecast(it, newLocation, this) }
     }
 
