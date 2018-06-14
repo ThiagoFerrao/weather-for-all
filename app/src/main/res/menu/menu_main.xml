@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="thiagocruz.weatherforall.ui.activities.MainActivity">
+    <item
+        android:id="@+id/action_change_metrics"
+        android:icon="@drawable/ic_temp_celsius"
+        android:title=""
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_change_to_map"
+        android:icon="@drawable/ic_map"
+        android:title=""
+        app:showAsAction="always" />
+</menu>
