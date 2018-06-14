@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(), ViewInterface {
 
         val itemChangeToMap = menu?.findItem(R.id.action_change_to_map)
         itemChangeToMap?.setOnMenuItemClickListener { _ ->
-            mPresenter?.handleChangeToMap()
+            mPresenter?.handleChangeScreen()
             true
         }
 
@@ -85,8 +85,6 @@ class MainActivity : AppCompatActivity(), ViewInterface {
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.itemAnimator = DefaultItemAnimator()
-
-        mPresenter?.getUserLocation()
     }
 
     override fun showLocationPermissionRequestDialog(permission: String) {
@@ -151,7 +149,7 @@ class MainActivity : AppCompatActivity(), ViewInterface {
         recyclerView.adapter = mAdapter
     }
 
-    override fun presentMap() {
+    override fun presentScreen() {
         val intent = Intent(this, MapActivity::class.java)
         mAdapter?.mList?.let { intent.putParcelableArrayListExtra(Constant.IntentExtra.CITY_FORECAST_LIST, ArrayList(it)) }
         startActivity(intent)

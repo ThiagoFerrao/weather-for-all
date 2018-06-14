@@ -86,8 +86,8 @@ class PresenterImpl : PresenterInterface, GeolocationManagerInterface.Listener, 
         mActivity?.let { mInteractor?.findWeatherForecast(it, userLocation, this) }
     }
 
-    override fun handleChangeToMap() {
-        mView?.presentMap()
+    override fun handleChangeScreen() {
+        mView?.presentScreen()
     }
 
 
