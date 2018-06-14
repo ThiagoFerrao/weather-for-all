@@ -36,7 +36,14 @@ class PresenterImpl : PresenterInterface, GeolocationManagerInterface.Listener, 
     }
 
     override fun initializeWithIntent(intent: Intent?) {
+        val cityForecastList = intent?.getParcelableArrayListExtra<CityForecast>(Constant.IntentExtra.CITY_FORECAST_LIST)
 
+        if (cityForecastList != null) {
+            mView?.loadCityForecastList(cityForecastList)
+            return
+        }
+
+        getUserLocation()
     }
 
     override fun getUserLocation() {
@@ -79,9 +86,12 @@ class PresenterImpl : PresenterInterface, GeolocationManagerInterface.Listener, 
     override fun handleChangeMetrics(item: MenuItem?) {
         TemperatureUnitManager.updateTemperatureUnit(mActivity, item)
 
-        val preferences = mActivity?.getSharedPreferences(Constant.SharedPreferences.DEFAULT, Context.MODE_PRIVATE) ?: return
-        val userLatitude = preferences.getString(Constant.SharedPreferences.KEY_USER_LOCATION_LATITUDE, null)?.toDouble() ?: return
-        val userLongitude = preferences.getString(Constant.SharedPreferences.KEY_USER_LOCATION_LONGITUDE, null)?.toDouble() ?: return
+        val preferences = mActivity?.getSharedPreferences(Constant.SharedPreferences.DEFAULT, Context.MODE_PRIVATE)
+                ?: return
+        val userLatitude = preferences.getString(Constant.SharedPreferences.KEY_USER_LOCATION_LATITUDE, null)?.toDouble()
+                ?: return
+        val userLongitude = preferences.getString(Constant.SharedPreferences.KEY_USER_LOCATION_LONGITUDE, null)?.toDouble()
+                ?: return
 
         val userLocation = Location("")
         userLocation.latitude = userLatitude
