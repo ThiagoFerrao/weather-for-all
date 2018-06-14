@@ -11,23 +11,23 @@ import com.google.android.gms.common.api.Status
 import thiagocruz.weatherforall.Constant
 import thiagocruz.weatherforall.R
 import thiagocruz.weatherforall.entities.CityForecast
-import thiagocruz.weatherforall.interactors.Interactor
+import thiagocruz.weatherforall.interactors.InteractorInterface
 import thiagocruz.weatherforall.interactors.InteractorImpl
 import thiagocruz.weatherforall.managers.GeoLocationManager
 import thiagocruz.weatherforall.managers.GeolocationManagerInterface
 import thiagocruz.weatherforall.managers.TemperatureUnitManager
-import thiagocruz.weatherforall.views.View
+import thiagocruz.weatherforall.views.ViewInterface
 
-class PresenterImpl : Presenter, GeolocationManagerInterface.Listener, Interactor.WeatherForecastListener {
+class PresenterImpl : PresenterInterface, GeolocationManagerInterface.Listener, InteractorInterface.WeatherForecastListener {
 
-    private var mView: View? = null
+    private var mView: ViewInterface? = null
     private var mActivity: Activity? = null
-    private var mInteractor: Interactor? = null
+    private var mInteractor: InteractorInterface? = null
 
 
-    // MARK: Presenter
+    // MARK: PresenterInterface
 
-    override fun attachView(view: View, activity: Activity) {
+    override fun attachView(view: ViewInterface, activity: Activity) {
         mView = view
         mActivity = activity
         mInteractor = InteractorImpl()
@@ -121,7 +121,7 @@ class PresenterImpl : Presenter, GeolocationManagerInterface.Listener, Interacto
     }
 
 
-    // MARK: Interactor.WeatherForecastListener
+    // MARK: InteractorInterface.WeatherForecastListener
 
     override fun foundWeatherForecast(result: List<CityForecast>) {
         mView?.loadCityForecastList(result)

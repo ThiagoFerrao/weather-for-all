@@ -4,7 +4,7 @@ import android.content.Context
 import android.location.Location
 import thiagocruz.weatherforall.entities.CityForecast
 
-interface Interactor {
+interface InteractorInterface {
     fun findWeatherForecast(context: Context, location: Location, listener: WeatherForecastListener)
 
     interface WeatherForecastListener {

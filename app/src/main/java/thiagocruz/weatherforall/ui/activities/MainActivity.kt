@@ -18,14 +18,14 @@ import thiagocruz.weatherforall.Constant
 import thiagocruz.weatherforall.R
 import thiagocruz.weatherforall.entities.CityForecast
 import thiagocruz.weatherforall.managers.TemperatureUnitManager
-import thiagocruz.weatherforall.presenters.Presenter
+import thiagocruz.weatherforall.presenters.PresenterInterface
 import thiagocruz.weatherforall.presenters.PresenterImpl
 import thiagocruz.weatherforall.ui.adapters.CityForecastAdapter
-import thiagocruz.weatherforall.views.View
+import thiagocruz.weatherforall.views.ViewInterface
 
-class MainActivity : AppCompatActivity(), View {
+class MainActivity : AppCompatActivity(), ViewInterface {
 
-    private var mPresenter: Presenter? = null
+    private var mPresenter: PresenterInterface? = null
     private var mAdapter: CityForecastAdapter? = null
     private var mItemChangeMetrics: MenuItem? = null
 
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity(), View {
     }
 
 
-    // MARK: View
+    // MARK: ViewInterface
 
     override fun setupViewContent() {
         setContentView(R.layout.activity_main)
