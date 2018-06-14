@@ -73,6 +73,8 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
             mMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(userLatitude, userLongitude), Constant.Map.DEFAULT_ZOOM))
 
         mList?.let {
+            mMap?.clear()
+
             for (cityForecast in it) {
                 val cityName = cityForecast.name
                 val cityLatLng = cityForecast.coordinate.getCityLatLng()
