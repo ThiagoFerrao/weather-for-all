@@ -61,13 +61,18 @@ class CityForecastAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     .error(R.drawable.logo_splash)
                     .into(itemView.imageViewWeatherIcon)
 
-            itemView.textViewWeatherDescription.text = cityForecast.weather.first().weatherDescription
+            val descriptionArrayCapitalize = ArrayList<String>()
+            val descriptionArray = cityForecast.weather.first().weatherDescription.split(" ")
+            for (word in descriptionArray) {
+                descriptionArrayCapitalize.add(word.capitalize())
+            }
 
-            itemView.textViewMainTemp.text = cityForecast.temperature.averageTemp.toString()
+            itemView.textViewWeatherDescription.text = descriptionArrayCapitalize.joinToString(" ")
 
-            itemView.textViewMinTemp.text = cityForecast.temperature.minimumTemp.toString()
+            itemView.textViewMaxTemp.text = String.format("Min: %.1f°", cityForecast.temperature.minimumTemp)
+            itemView.textViewMinTemp.text = String.format("Max: %.1f°", cityForecast.temperature.maximumTemp)
 
-            itemView.textViewMaxTemp.text = cityForecast.temperature.maximumTemp.toString()
+            itemView.textViewMainTemp.text = String.format("%.0f°", cityForecast.temperature.averageTemp)
         }
     }
 
