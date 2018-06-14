@@ -18,8 +18,10 @@ import thiagocruz.weatherforall.managers.TemperatureUnitManager
 class MapActivity : BaseActivity(), OnMapReadyCallback {
 
     private var mMap: GoogleMap? = null
-
-//  mPresenter?.initializeWithIntent(intent)
+        set(value) {
+            field = value
+            mPresenter?.initializeWithIntent(intent)
+        }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_map, menu)
