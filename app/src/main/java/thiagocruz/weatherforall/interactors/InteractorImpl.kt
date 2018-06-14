@@ -12,9 +12,9 @@ import thiagocruz.weatherforall.services.BaseCallback
 import thiagocruz.weatherforall.services.WeatherForecastService
 import thiagocruz.weatherforall.utils.LocationPerimeterUtil
 
-class MainInteractorImpl : MainInteractor {
+class InteractorImpl : Interactor {
 
-    override fun findWeatherForecast(context: Context, location: Location, listener: MainInteractor.WeatherForecastListener) {
+    override fun findWeatherForecast(context: Context, location: Location, listener: Interactor.WeatherForecastListener) {
         val forecastPerimeter = LocationPerimeterUtil.getDefaultPerimeter(location)
         val temperatureUnit = TemperatureUnitManager.getCurrentTemperatureUnit(context)
 
@@ -43,7 +43,7 @@ class MainInteractorImpl : MainInteractor {
                 })
     }
 
-    private fun sortCityForecastListByUserDistance(list: List<CityForecast>, context: Context, listener: MainInteractor.WeatherForecastListener) {
+    private fun sortCityForecastListByUserDistance(list: List<CityForecast>, context: Context, listener: Interactor.WeatherForecastListener) {
         val preferences = context.getSharedPreferences(Constant.SharedPreferences.DEFAULT, Context.MODE_PRIVATE)
         val userLatitude = preferences.getString(Constant.SharedPreferences.KEY_USER_LOCATION_LATITUDE, null)?.toDouble()
         val userLongitude = preferences.getString(Constant.SharedPreferences.KEY_USER_LOCATION_LONGITUDE, null)?.toDouble()

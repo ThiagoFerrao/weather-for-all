@@ -3,10 +3,10 @@ package thiagocruz.weatherforall.presenters
 import android.app.Activity
 import android.content.Intent
 import android.view.MenuItem
-import thiagocruz.weatherforall.views.MainView
+import thiagocruz.weatherforall.views.View
 
-interface MainPresenter {
-    fun attachView(mainView: MainView, activity: Activity)
+interface Presenter {
+    fun attachView(view: View, activity: Activity)
     fun getUserLocation()
     fun locationPermissionRequestOpeningSettingsAccepted()
     fun locationPermissionRequestAccepted(permission: String)

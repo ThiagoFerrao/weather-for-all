@@ -11,26 +11,26 @@ import com.google.android.gms.common.api.Status
 import thiagocruz.weatherforall.Constant
 import thiagocruz.weatherforall.R
 import thiagocruz.weatherforall.entities.CityForecast
-import thiagocruz.weatherforall.interactors.MainInteractor
-import thiagocruz.weatherforall.interactors.MainInteractorImpl
+import thiagocruz.weatherforall.interactors.Interactor
+import thiagocruz.weatherforall.interactors.InteractorImpl
 import thiagocruz.weatherforall.managers.GeoLocationManager
 import thiagocruz.weatherforall.managers.GeolocationManagerInterface
 import thiagocruz.weatherforall.managers.TemperatureUnitManager
-import thiagocruz.weatherforall.views.MainView
+import thiagocruz.weatherforall.views.View
 
-class MainPresenterImpl : MainPresenter, GeolocationManagerInterface.Listener, MainInteractor.WeatherForecastListener {
+class PresenterImpl : Presenter, GeolocationManagerInterface.Listener, Interactor.WeatherForecastListener {
 
-    private var mView: MainView? = null
+    private var mView: View? = null
     private var mActivity: Activity? = null
-    private var mInteractor: MainInteractor? = null
+    private var mInteractor: Interactor? = null
 
 
-    // MARK: MainPresenter
+    // MARK: Presenter
 
-    override fun attachView(mainView: MainView, activity: Activity) {
-        mView = mainView
+    override fun attachView(view: View, activity: Activity) {
+        mView = view
         mActivity = activity
-        mInteractor = MainInteractorImpl()
+        mInteractor = InteractorImpl()
 
         mView?.setupViewContent()
     }
@@ -51,7 +51,7 @@ class MainPresenterImpl : MainPresenter, GeolocationManagerInterface.Listener, M
         when (requestCode) {
             Constant.ActivityResultRequestCode.GEOLOCATION -> {
                 if (resultCode != RESULT_OK) {
-                    return print("[MainPresenterImpl] User Declined The Location Permission Request")
+                    return print("[PresenterImpl] User Declined The Location Permission Request")
                 }
 
                 mActivity?.let { GeoLocationManager.getUserLocation(it, this) }
@@ -67,7 +67,7 @@ class MainPresenterImpl : MainPresenter, GeolocationManagerInterface.Listener, M
                     return
                 }
 
-                print("[MainPresenterImpl] User Declined Turning On The Location")
+                print("[PresenterImpl] User Declined Turning On The Location")
             }
         }
     }
@@ -121,7 +121,7 @@ class MainPresenterImpl : MainPresenter, GeolocationManagerInterface.Listener, M
     }
 
 
-    // MARK: MainInteractor.WeatherForecastListener
+    // MARK: Interactor.WeatherForecastListener
 
     override fun foundWeatherForecast(result: List<CityForecast>) {
         mView?.loadCityForecastList(result)
