@@ -18,6 +18,8 @@ import thiagocruz.weatherforall.Constant
 import thiagocruz.weatherforall.R
 import thiagocruz.weatherforall.managers.TemperatureUnitManager
 import java.lang.Exception
+import android.graphics.drawable.BitmapDrawable
+
 
 class MapActivity : BaseActivity(), OnMapReadyCallback {
 
@@ -79,14 +81,9 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
                 val cityName = cityForecast.name
                 val cityLatLng = cityForecast.coordinate.getCityLatLng()
 
-                val tempUnit = TemperatureUnitManager.getCurrentTemperatureUnit(this)
-                val degreesPrefix = if (TemperatureUnitManager.isTemperatureUnitCelsius(tempUnit)) {
-                    "°C"
-                } else {
-                    "°F"
-                }
-                val cityMinTemp = String.format("Min: %.1f$degreesPrefix", cityForecast.temperature.minimumTemp)
-                val cityMaxTemp = String.format("Max: %.1f$degreesPrefix", cityForecast.temperature.maximumTemp)
+                val unitSuffix = TemperatureUnitManager.getTemperatureUnitSuffix(this)
+                val cityMinTemp = String.format("Min: %.1f$unitSuffix", cityForecast.temperature.minimumTemp)
+                val cityMaxTemp = String.format("Max: %.1f$unitSuffix", cityForecast.temperature.maximumTemp)
 
                 val markerOptions = MarkerOptions()
                         .position(cityLatLng)
@@ -95,7 +92,6 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
 
                 Picasso.get()
                         .load(cityForecast.weather.first().getWeatherImageUrl())
-                        .placeholder(R.drawable.logo_splash)
                         .error(R.drawable.logo_splash)
                         .into(object : Target {
                             override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
@@ -103,6 +99,12 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
                             }
 
                             override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
+                                if (errorDrawable is BitmapDrawable && errorDrawable.bitmap != null) {
+                                    val bitmap = errorDrawable.bitmap
+                                    val weatherIcon = Bitmap.createScaledBitmap(bitmap, 100, 100, false)
+                                    markerOptions.icon(BitmapDescriptorFactory.fromBitmap(weatherIcon))
+                                }
+
                                 mMap?.addMarker(markerOptions)
                             }
 

@@ -44,4 +44,13 @@ object TemperatureUnitManager {
 
         return tempUnit == Constant.TemperatureUnit.CELSIUS
     }
+
+    fun getTemperatureUnitSuffix(context: Context): String {
+        val tempUnit = TemperatureUnitManager.getCurrentTemperatureUnit(context)
+        if (TemperatureUnitManager.isTemperatureUnitCelsius(tempUnit)) {
+            return "°C"
+        }
+
+        return "°F"
+    }
 }

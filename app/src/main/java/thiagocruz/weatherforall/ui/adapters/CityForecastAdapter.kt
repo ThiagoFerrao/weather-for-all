@@ -100,16 +100,11 @@ class CityForecastAdapter(val context: Context) : RecyclerView.Adapter<RecyclerV
         }
 
         private fun setupTemperatures(context: Context, cityForecast: CityForecast) {
-            val tempUnit = TemperatureUnitManager.getCurrentTemperatureUnit(context)
-            val degreesPrefix = if (TemperatureUnitManager.isTemperatureUnitCelsius(tempUnit)) {
-                "°C"
-            } else {
-                "°F"
-            }
+            val unitSuffix = TemperatureUnitManager.getTemperatureUnitSuffix(context)
 
-            itemView.textViewMaxTemp.text = String.format("Min: %.1f$degreesPrefix", cityForecast.temperature.minimumTemp)
-            itemView.textViewMinTemp.text = String.format("Max: %.1f$degreesPrefix", cityForecast.temperature.maximumTemp)
-            itemView.textViewMainTemp.text = String.format("%.0f$degreesPrefix", cityForecast.temperature.averageTemp)
+            itemView.textViewMaxTemp.text = String.format("Min: %.1f$unitSuffix", cityForecast.temperature.minimumTemp)
+            itemView.textViewMinTemp.text = String.format("Max: %.1f$unitSuffix", cityForecast.temperature.maximumTemp)
+            itemView.textViewMainTemp.text = String.format("%.0f$unitSuffix", cityForecast.temperature.averageTemp)
         }
     }
 
