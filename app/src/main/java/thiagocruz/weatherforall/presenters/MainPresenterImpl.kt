@@ -73,7 +73,6 @@ class MainPresenterImpl : MainPresenter, GeolocationManagerInterface.Listener, M
 
     override fun handleChangeMetrics(item: MenuItem?) {
         TemperatureUnitManager.updateTemperatureUnit(mActivity, item)
-        getUserLocation()
     }
 
 

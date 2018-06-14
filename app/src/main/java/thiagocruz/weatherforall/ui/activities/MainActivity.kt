@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity(), MainView {
         mItemChangeMetrics = menu?.findItem(R.id.action_change_metrics)
         mItemChangeMetrics?.setOnMenuItemClickListener { item ->
             mPresenter?.handleChangeMetrics(item)
+            mPresenter?.getUserLocation()
             true
         }
 
