@@ -154,6 +154,7 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
     private fun userInterfaceEnable(isEnabled: Boolean) {
         mItemChangeMetrics?.isEnabled = isEnabled
         mItemChangeToList?.isEnabled = isEnabled
+        mMap?.uiSettings?.isScrollGesturesEnabled = isEnabled
         floatingButtonGetLocation.isClickable = isEnabled
     }
 
