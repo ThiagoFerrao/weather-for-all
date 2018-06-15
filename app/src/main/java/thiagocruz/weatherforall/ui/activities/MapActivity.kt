@@ -13,12 +13,15 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_map.*
 import thiagocruz.weatherforall.Constant
 import thiagocruz.weatherforall.R
 import thiagocruz.weatherforall.managers.TemperatureUnitManager
 import java.lang.Exception
 import android.graphics.drawable.BitmapDrawable
+import android.view.MenuItem
+import android.view.View.GONE
+import android.view.View.VISIBLE
 
 class MapActivity : BaseActivity(), OnMapReadyCallback {
 
@@ -27,20 +30,22 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
             field = value
             mPresenter?.initializeWithIntent(intent)
         }
-    private var mCurrentCameraPostition: LatLng? = null
+    private var mCurrentCameraPosition: LatLng? = null
+    private var mItemChangeMetrics: MenuItem? = null
+    private var mItemChangeToList: MenuItem? = null
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_map, menu)
 
-        val itemChangeMetrics = menu?.findItem(R.id.action_change_metrics)
-        TemperatureUnitManager.setCurrentMenuItemIcon(this, itemChangeMetrics)
-        itemChangeMetrics?.setOnMenuItemClickListener { item ->
+        mItemChangeMetrics = menu?.findItem(R.id.action_change_metrics)
+        TemperatureUnitManager.setCurrentMenuItemIcon(this, mItemChangeMetrics)
+        mItemChangeMetrics?.setOnMenuItemClickListener { item ->
             mPresenter?.handleChangeMetrics(item)
             true
         }
 
-        val itemChangeToList = menu?.findItem(R.id.action_change_to_list)
-        itemChangeToList?.setOnMenuItemClickListener { _ ->
+        mItemChangeToList = menu?.findItem(R.id.action_change_to_list)
+        mItemChangeToList?.setOnMenuItemClickListener { _ ->
             mPresenter?.handleChangeScreen()
             true
         }
@@ -79,7 +84,7 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
         if (userLatitude != null && userLongitude != null)
             mMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(userLatitude, userLongitude), Constant.Map.DEFAULT_ZOOM))
 
-        mCurrentCameraPostition = mMap?.cameraPosition?.target
+        mCurrentCameraPosition = mMap?.cameraPosition?.target
     }
 
     private fun addMarksToMap() {
@@ -134,6 +139,22 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
         finish()
     }
 
+    override fun showLoadingScreen() {
+        layoutContent.alpha = Constant.ViewAlpha.DISABLE
+        progressBar.visibility = VISIBLE
+        mItemChangeMetrics?.isEnabled = false
+        mItemChangeToList?.isEnabled = false
+        floatingButtonGetLocation.isClickable = false
+    }
+
+    override fun hideLoadingScreen() {
+        layoutContent.alpha = Constant.ViewAlpha.ENABLE
+        progressBar.visibility = GONE
+        mItemChangeMetrics?.isEnabled = true
+        mItemChangeToList?.isEnabled = true
+        floatingButtonGetLocation.isClickable = true
+    }
+
 
     // MARK: OnMapReadyCallback
 
@@ -147,7 +168,7 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
             true
         }
         mMap?.setOnCameraIdleListener {
-            val hasCameraPositionChanged = !(mCurrentCameraPostition?.equals(mMap?.cameraPosition?.target)
+            val hasCameraPositionChanged = !(mCurrentCameraPosition?.equals(mMap?.cameraPosition?.target)
                     ?: false)
             if (hasCameraPositionChanged)
                 mPresenter?.mapCameraPositionUpdated(mMap?.cameraPosition?.target)

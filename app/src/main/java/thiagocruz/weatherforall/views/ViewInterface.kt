@@ -13,4 +13,6 @@ interface ViewInterface {
     fun showAppSettingsScreen()
     fun loadCityForecastList(result: List<CityForecast>)
     fun presentScreen()
+    fun showLoading()
+    fun hideLoading()
 }

@@ -110,6 +110,14 @@ abstract class BaseActivity : AppCompatActivity(), ViewInterface {
         presentNextScreen()
     }
 
+    override fun showLoading() {
+        showLoadingScreen()
+    }
+
+    override fun hideLoading() {
+        hideLoadingScreen()
+    }
+
 
     // MARK: Abstract Methods
 
@@ -118,4 +126,6 @@ abstract class BaseActivity : AppCompatActivity(), ViewInterface {
     abstract fun setupContent()
     abstract fun cityForecastListWasUpdated()
     abstract fun presentNextScreen()
+    abstract fun showLoadingScreen()
+    abstract fun hideLoadingScreen()
 }

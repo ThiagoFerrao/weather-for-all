@@ -5,6 +5,8 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import thiagocruz.weatherforall.Constant
 import thiagocruz.weatherforall.R
@@ -14,19 +16,21 @@ import thiagocruz.weatherforall.ui.adapters.CityForecastAdapter
 class MainActivity : BaseActivity() {
 
     private var mAdapter: CityForecastAdapter? = null
+    private var mItemChangeMetrics: MenuItem? = null
+    private var mItemChangeToMap: MenuItem? = null
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
 
-        val itemChangeMetrics = menu?.findItem(R.id.action_change_metrics)
-        TemperatureUnitManager.setCurrentMenuItemIcon(this, itemChangeMetrics)
-        itemChangeMetrics?.setOnMenuItemClickListener { item ->
+        mItemChangeMetrics = menu?.findItem(R.id.action_change_metrics)
+        TemperatureUnitManager.setCurrentMenuItemIcon(this, mItemChangeMetrics)
+        mItemChangeMetrics?.setOnMenuItemClickListener { item ->
             mPresenter?.handleChangeMetrics(item)
             true
         }
 
-        val itemChangeToMap = menu?.findItem(R.id.action_change_to_map)
-        itemChangeToMap?.setOnMenuItemClickListener { _ ->
+        mItemChangeToMap = menu?.findItem(R.id.action_change_to_map)
+        mItemChangeToMap?.setOnMenuItemClickListener { _ ->
             mPresenter?.handleChangeScreen()
             true
         }
@@ -71,5 +75,21 @@ class MainActivity : BaseActivity() {
         mList?.let { intent.putParcelableArrayListExtra(Constant.IntentExtra.CITY_FORECAST_LIST, ArrayList(it)) }
         startActivity(intent)
         finish()
+    }
+
+    override fun showLoadingScreen() {
+        progressBar.visibility = View.VISIBLE
+        layoutContent.alpha = Constant.ViewAlpha.DISABLE
+        mItemChangeMetrics?.isEnabled = false
+        mItemChangeToMap?.isEnabled = false
+        floatingButtonGetLocation.isClickable = false
+    }
+
+    override fun hideLoadingScreen() {
+        progressBar.visibility = View.GONE
+        layoutContent.alpha = Constant.ViewAlpha.ENABLE
+        mItemChangeMetrics?.isEnabled = true
+        mItemChangeToMap?.isEnabled = true
+        floatingButtonGetLocation.isClickable = true
     }
 }

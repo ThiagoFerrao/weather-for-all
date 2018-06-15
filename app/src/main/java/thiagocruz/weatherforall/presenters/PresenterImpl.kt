@@ -61,6 +61,7 @@ class PresenterImpl : PresenterInterface, GeolocationManagerInterface.Listener, 
         editor?.putString(Constant.SharedPreferences.KEY_USER_LOCATION_LONGITUDE, newCameraLatLng.longitude.toString())
         editor?.apply()
 
+        mView?.showLoading()
         mActivity?.let { mInteractor?.findWeatherForecast(it, newLocation, this) }
     }
 
@@ -115,6 +116,7 @@ class PresenterImpl : PresenterInterface, GeolocationManagerInterface.Listener, 
         userLocation.latitude = userLatitude
         userLocation.longitude = userLongitude
 
+        mView?.showLoading()
         mActivity?.let { mInteractor?.findWeatherForecast(it, userLocation, this) }
     }
 
@@ -143,6 +145,7 @@ class PresenterImpl : PresenterInterface, GeolocationManagerInterface.Listener, 
         editor?.putString(Constant.SharedPreferences.KEY_USER_LOCATION_LONGITUDE, location.longitude.toString())
         editor?.apply()
 
+        mView?.showLoading()
         mActivity?.let { mInteractor?.findWeatherForecast(it, location, this) }
     }
 
@@ -156,14 +159,17 @@ class PresenterImpl : PresenterInterface, GeolocationManagerInterface.Listener, 
     // MARK: InteractorInterface.WeatherForecastListener
 
     override fun foundWeatherForecast(result: List<CityForecast>) {
+        mView?.hideLoading()
         mView?.loadCityForecastList(result)
     }
 
     override fun emptyWeatherForecast() {
+        mView?.hideLoading()
         mView?.loadCityForecastList(ArrayList())
     }
 
     override fun errorWhileFetchingWeatherForecast() {
+        mView?.hideLoading()
         val errorMessage = mActivity?.let { it.getString(R.string.dialog_location_request_failed_message) }
                 ?: return
         mView?.showErrorDialog(errorMessage)

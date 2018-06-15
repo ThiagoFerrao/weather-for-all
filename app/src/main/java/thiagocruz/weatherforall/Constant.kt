@@ -38,4 +38,9 @@ object Constant {
     object Map {
         const val DEFAULT_ZOOM = 9f
     }
+
+    object ViewAlpha {
+        const val DISABLE = 0.5f
+        const val ENABLE = 1f
+    }
 }
