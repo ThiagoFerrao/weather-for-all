@@ -1,5 +1,6 @@
 package thiagocruz.weatherforall.utils
 
+import com.google.gson.JsonSyntaxException
 import retrofit2.Response
 import java.io.IOException
 
@@ -11,5 +12,9 @@ object ServiceErrorUtil {
 
     fun hasConnectionError(t: Throwable?): Boolean {
         return t is IOException
+    }
+
+    fun hasApiError(t: Throwable?): Boolean {
+        return t is JsonSyntaxException
     }
 }

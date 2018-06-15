@@ -34,6 +34,10 @@ class InteractorImpl : InteractorInterface {
                         listener.errorWhileFetchingWeatherForecast()
                     }
 
+                    override fun onApiError(call: Call<WeatherApiResponse>?, t: Throwable?) {
+                        listener.emptyWeatherForecast()
+                    }
+
                     override fun onConnectionError(call: Call<WeatherApiResponse>?, t: Throwable?) {
                         listener.errorWhileFetchingWeatherForecast()
                     }

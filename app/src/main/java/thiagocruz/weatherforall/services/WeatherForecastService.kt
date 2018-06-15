@@ -24,6 +24,8 @@ object WeatherForecastService {
             override fun onFailure(call: Call<WeatherApiResponse>?, t: Throwable?) {
                 if (ServiceErrorUtil.hasConnectionError(t)) return callback.onConnectionError(call, t)
 
+                if (ServiceErrorUtil.hasApiError(t)) return callback.onApiError(call, t)
+
                 callback.onGeneralError(call, t)
             }
         })
