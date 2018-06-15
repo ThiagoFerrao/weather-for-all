@@ -142,17 +142,19 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
     override fun showLoadingScreen() {
         layoutContent.alpha = Constant.ViewAlpha.DISABLE
         progressBar.visibility = VISIBLE
-        mItemChangeMetrics?.isEnabled = false
-        mItemChangeToList?.isEnabled = false
-        floatingButtonGetLocation.isClickable = false
+        userInterfaceEnable(false)
     }
 
     override fun hideLoadingScreen() {
         layoutContent.alpha = Constant.ViewAlpha.ENABLE
         progressBar.visibility = GONE
-        mItemChangeMetrics?.isEnabled = true
-        mItemChangeToList?.isEnabled = true
-        floatingButtonGetLocation.isClickable = true
+        userInterfaceEnable(true)
+    }
+
+    private fun userInterfaceEnable(isEnabled: Boolean) {
+        mItemChangeMetrics?.isEnabled = isEnabled
+        mItemChangeToList?.isEnabled = isEnabled
+        floatingButtonGetLocation.isClickable = isEnabled
     }
 
 

@@ -80,16 +80,18 @@ class MainActivity : BaseActivity() {
     override fun showLoadingScreen() {
         progressBar.visibility = View.VISIBLE
         layoutContent.alpha = Constant.ViewAlpha.DISABLE
-        mItemChangeMetrics?.isEnabled = false
-        mItemChangeToMap?.isEnabled = false
-        floatingButtonGetLocation.isClickable = false
+        userInterfaceEnable(false)
     }
 
     override fun hideLoadingScreen() {
         progressBar.visibility = View.GONE
         layoutContent.alpha = Constant.ViewAlpha.ENABLE
-        mItemChangeMetrics?.isEnabled = true
-        mItemChangeToMap?.isEnabled = true
-        floatingButtonGetLocation.isClickable = true
+        userInterfaceEnable(true)
+    }
+
+    private fun userInterfaceEnable(isEnabled: Boolean) {
+        mItemChangeMetrics?.isEnabled = isEnabled
+        mItemChangeToMap?.isEnabled = isEnabled
+        floatingButtonGetLocation.isClickable = isEnabled
     }
 }
