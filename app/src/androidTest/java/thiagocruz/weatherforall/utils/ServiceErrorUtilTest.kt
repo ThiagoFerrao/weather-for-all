@@ -11,13 +11,13 @@ import java.io.IOException
 
 class ServiceErrorUtilTest {
 
-    private val testResponseWithStatusCode400: Response<WeatherApiResponse> = Response.error(400, ResponseBody.create(MediaType.parse(""), ""))
-    private val testResponseWithStatusCode600: Response<WeatherApiResponse> = Response.error(600, ResponseBody.create(MediaType.parse(""), ""))
+    private val testResponseWithStatusCode404: Response<WeatherApiResponse> = Response.error(404, ResponseBody.create(MediaType.parse(""), ""))
+    private val testResponseWithStatusCode200: Response<WeatherApiResponse> = Response.success(WeatherApiResponse(ArrayList()))
 
     @Test
     fun testHasInternalError() {
-        assert(ServiceErrorUtil.hasInternalError(testResponseWithStatusCode400))
-        assert(!ServiceErrorUtil.hasInternalError(testResponseWithStatusCode600))
+        assert(ServiceErrorUtil.hasInternalError(testResponseWithStatusCode404))
+        assert(!ServiceErrorUtil.hasInternalError(testResponseWithStatusCode200))
     }
 
     @Test
