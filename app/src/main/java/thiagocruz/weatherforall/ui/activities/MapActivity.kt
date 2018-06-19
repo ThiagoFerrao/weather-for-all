@@ -73,7 +73,11 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
 
     override fun cityForecastListWasUpdated() {
         moveMapCameraToForecastLocation()
-        addMarksToMap()
+
+        mMap?.clear()
+
+        addUserMarkToMap()
+        addForecastMarksToMap()
     }
 
     private fun moveMapCameraToForecastLocation() {
@@ -87,10 +91,28 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
         mCurrentCameraPosition = mMap?.cameraPosition?.target
     }
 
-    private fun addMarksToMap() {
-        mList?.let {
-            mMap?.clear()
+    private fun addUserMarkToMap() {
+        val preferences = this.getSharedPreferences(Constant.SharedPreferences.DEFAULT, Context.MODE_PRIVATE)
+        val userLatitude = preferences.getString(Constant.SharedPreferences.KEY_USER_LOCATION_LATITUDE, null)?.toDouble()
+        val userLongitude = preferences.getString(Constant.SharedPreferences.KEY_USER_LOCATION_LONGITUDE, null)?.toDouble()
 
+        if (userLatitude != null && userLongitude != null) {
+            val markerOptions = MarkerOptions()
+                    .position(LatLng(userLatitude, userLongitude))
+                    .title("Sua Localização")
+
+            val bitmapDrawable = getDrawable(R.drawable.ic_user_location) as? BitmapDrawable
+            bitmapDrawable?.bitmap?.let {
+                val bitmap = Bitmap.createScaledBitmap(it, 100, 100, false)
+                markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+            }
+
+            mMap?.addMarker(markerOptions)
+        }
+    }
+
+    private fun addForecastMarksToMap() {
+        mList?.let {
             for (cityForecast in it) {
                 val cityName = cityForecast.name
                 val cityLatLng = cityForecast.coordinate.getCityLatLng()
