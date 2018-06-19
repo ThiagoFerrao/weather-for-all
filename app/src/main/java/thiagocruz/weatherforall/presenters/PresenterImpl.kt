@@ -57,8 +57,8 @@ class PresenterImpl : PresenterInterface, GeolocationManagerInterface.Listener, 
         newLocation.longitude = newCameraLatLng.longitude
 
         val editor = mActivity?.getSharedPreferences(Constant.SharedPreferences.DEFAULT, Context.MODE_PRIVATE)?.edit()
-        editor?.putString(Constant.SharedPreferences.KEY_USER_LOCATION_LATITUDE, newCameraLatLng.latitude.toString())
-        editor?.putString(Constant.SharedPreferences.KEY_USER_LOCATION_LONGITUDE, newCameraLatLng.longitude.toString())
+        editor?.putString(Constant.SharedPreferences.KEY_FORECAST_LOCATION_LATITUDE, newCameraLatLng.latitude.toString())
+        editor?.putString(Constant.SharedPreferences.KEY_FORECAST_LOCATION_LONGITUDE, newCameraLatLng.longitude.toString())
         editor?.apply()
 
         mView?.showLoading()
@@ -107,17 +107,17 @@ class PresenterImpl : PresenterInterface, GeolocationManagerInterface.Listener, 
 
         val preferences = mActivity?.getSharedPreferences(Constant.SharedPreferences.DEFAULT, Context.MODE_PRIVATE)
                 ?: return
-        val userLatitude = preferences.getString(Constant.SharedPreferences.KEY_USER_LOCATION_LATITUDE, null)?.toDouble()
+        val forecastLatitude = preferences.getString(Constant.SharedPreferences.KEY_FORECAST_LOCATION_LATITUDE, null)?.toDouble()
                 ?: return
-        val userLongitude = preferences.getString(Constant.SharedPreferences.KEY_USER_LOCATION_LONGITUDE, null)?.toDouble()
+        val forecastLongitude = preferences.getString(Constant.SharedPreferences.KEY_FORECAST_LOCATION_LONGITUDE, null)?.toDouble()
                 ?: return
 
-        val userLocation = Location("")
-        userLocation.latitude = userLatitude
-        userLocation.longitude = userLongitude
+        val forecastLocation = Location("")
+        forecastLocation.latitude = forecastLatitude
+        forecastLocation.longitude = forecastLongitude
 
         mView?.showLoading()
-        mActivity?.let { mInteractor?.findWeatherForecast(it, userLocation, this) }
+        mActivity?.let { mInteractor?.findWeatherForecast(it, forecastLocation, this) }
     }
 
     override fun handleChangeScreen() {
@@ -143,6 +143,8 @@ class PresenterImpl : PresenterInterface, GeolocationManagerInterface.Listener, 
         val editor = mActivity?.getSharedPreferences(Constant.SharedPreferences.DEFAULT, Context.MODE_PRIVATE)?.edit()
         editor?.putString(Constant.SharedPreferences.KEY_USER_LOCATION_LATITUDE, location.latitude.toString())
         editor?.putString(Constant.SharedPreferences.KEY_USER_LOCATION_LONGITUDE, location.longitude.toString())
+        editor?.putString(Constant.SharedPreferences.KEY_FORECAST_LOCATION_LATITUDE, location.latitude.toString())
+        editor?.putString(Constant.SharedPreferences.KEY_FORECAST_LOCATION_LONGITUDE, location.longitude.toString())
         editor?.apply()
 
         mView?.showLoading()

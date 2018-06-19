@@ -73,9 +73,9 @@ class CityForecastAdapter(val context: Context) : RecyclerView.Adapter<RecyclerV
             val userLongitude = preferences.getString(Constant.SharedPreferences.KEY_USER_LOCATION_LONGITUDE, null)?.toDouble()
 
             val distanceText = if (userLatitude == null || userLongitude == null) {
-                "Dist: ?"
+                "Distância: ?"
             } else {
-                String.format("Dist: %.1f Km", cityForecast.coordinate.distanceToLatLngInKm(userLatitude, userLongitude))
+                String.format("Distância: %.1f Km", cityForecast.coordinate.distanceToLatLngInKm(userLatitude, userLongitude))
             }
 
             itemView.textViewDistanceToUser.text = distanceText
