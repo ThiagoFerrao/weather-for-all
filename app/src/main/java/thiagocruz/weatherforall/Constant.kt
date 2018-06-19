@@ -29,6 +29,8 @@ object Constant {
         const val KEY_TEMPERATURE_UNIT = "keyTemperatureUnit"
         const val KEY_USER_LOCATION_LATITUDE = "keyUserLocationLatitude"
         const val KEY_USER_LOCATION_LONGITUDE = "keyUserLocationLongitude"
+        const val KEY_FORECAST_LOCATION_LATITUDE = "keyForecastLocationLatitude"
+        const val KEY_FORECAST_LOCATION_LONGITUDE = "keyForecastLocationLongitude"
     }
 
     object IntentExtra {
